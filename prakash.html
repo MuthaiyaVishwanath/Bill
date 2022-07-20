@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head><title>1pagecalculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
+    </head>
+    <body class="bg-danger">
+
+        <div class="container">
+           <div><h1 class="text-center text-white">Bill Calculator</h1></div>
+           
+            <form action="prakash.php" method="post">
+            <div class="row pt-3">
+                <div class="col-sm-6 col-md-6 col-xl-6 bg-success my-5">
+                       <div class="display-4 text-white">Name: </div><input type="text" id="name" name="name" required placeholder="prakash">
+                           <div class="display-4 pt-2 text-white">Email: </div><input type="email" name="email" id="email" required placeholder="prakash@gmail.com">
+                           <div class="dropdown pt-4">
+                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" name="product">
+                                      Product</button>
+                                 <ul class="dropdown-menu dropdown-menu-right bg-primary" name="prod" id="prod">
+                                      <li class="dropdown-item" id="ices">ICE Cream</li>
+                                      <li class="dropdown-item" id="choclate">chocolate</li>
+                                 </ul>
+                            </div>
+                        <div>
+                        <h3 class="display-4 pt-2 text-white">Quantity :</h3><input class="display-5" id="qty" name="qty" type="number" placeholder="100g">
+                    </div>
+                    <pre>
+                        <div class="pt-3">
+                            <input class="btn btn-danger" type="submit" name="submit">
+                </div>
+                </pre>
+                </div>
+            
+                <div class="col-sm-6 col-md-6 col-xl-6 pt-2 bg-primary my-5">
+                    <h3 class="display-5 text-white pt-2">Your Name : <span id="nameout"></span></h3>
+                    <h3 class="display-5 text-white pt-2">Your Email : <span id="emailout"></span></h3>
+                    <table class=" table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Menu</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Amout</th>
+                            </tr>
+                        </thead>
+                        <tbody id="out">
+                            
+                        </tbody>
+                    </table>
+                    <h1>Total Amout: Rs. <span id="amount">0</span></h1>
+                </div>
+            </div>
+            </form>
+        </div>
+
+    </body>
+    <script>
+       var email="" ,name="" ,total="" ,qty=0;
+       var ice=1.2 ,iceb="",cho=1.2,chob="";
+       $(document).ready(function(){
+            $("#name").keyup(function(){
+                $("#nameout").html(this.value);
+            })
+       })
+       $(document).ready(function(){
+            $("#email").keyup(function(){
+                $("#emailout").html(this.value);
+            })
+       })
+    // document.getElementById("name").addEventListener("keyup",function(){
+    //     document.getElementById("nameout").innerHTML=this.value;
+    // })
+    // document.getElementById("email").addEventListener("keyup",function(){
+    //     document.getElementById("emailout").innerHTML=this.value;
+    // })
+    document.getElementById("ices").addEventListener("click",function(){
+    document.getElementById("qty").addEventListener("keyup",function(){
+      if(this.value==""||this.value==0){
+         iceb="" , qty=0;
+         output();
+      } else{
+         qty=this.value;
+         iceb="<tr><td>ICE Cream</td> <td>Rs."+ice+"</td><td>"+qty+"</td><td>"+ice*qty+"</td></tr>";
+         output();
+      }
+    })
+})
+    document.getElementById("choclate").addEventListener("click",function(){
+    document.getElementById("qty").addEventListener("keyup",function(){
+      if(this.value==""||this.value==0){
+         chob="" , qty=0;
+         output();
+      } else{
+         qty=this.value;
+         chob="<tr><td>Chocolate</td> <td>Rs."+cho+"</td><td>"+qty+"</td><td>"+cho*qty+"</td></tr>";
+         output();
+      }
+    })
+})
+    function output(){
+    document.getElementById("out").innerHTML=iceb+chob; //table statement
+    document.getElementById("amount").innerHTML = ice*qty+cho*qty; // total amount
+}
+    </script>
+</html>
